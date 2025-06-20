@@ -1,0 +1,33 @@
+name: NicoNico Glitch (超強力)
+
+on:
+  workflow_dispatch:
+    inputs:
+      sm_number:
+        description: 'ニコニコ動画のsm番号'
+        required: true
+        default: ''
+
+jobs:
+  glitch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg python3 python3-pip imagemagick
+          pip3 install ffmpeg-python yt-dlp numpy scipy librosa
+
+      - name: Run super glitch
+        env:
+          SM: ${{ github.event.inputs.sm_number }}
+        run: |
+          python3 scripts/process.py "$SM"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: super-glitch-results
+          path: output/
