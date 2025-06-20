@@ -1,4 +1,4 @@
-name: NicoNico Glitch (超強力)
+name: NicoNico Glitch (超強力 v2)
 
 on:
   workflow_dispatch:
@@ -35,7 +35,7 @@ jobs:
           directory: output
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: super-glitch-results
           path: output/
